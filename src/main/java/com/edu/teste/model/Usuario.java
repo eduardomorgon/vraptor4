@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  *
@@ -41,7 +42,8 @@ public class Usuario implements Serializable {
     private String root = "N";
     
 //    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    private List<Telefone> telefones;
+    @Transient
+    private List<Telefone> telefones;
     
 
     /**
@@ -86,19 +88,19 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-//    /**
-//     * @return the telefones
-//     */
-//    public List<Telefone> getTelefones() {
-//        return telefones;
-//    }
-//
-//    /**
-//     * @param telefones the telefones to set
-//     */
-//    public void setTelefones(List<Telefone> telefones) {
-//        this.telefones = telefones;
-//    }
+    /**
+     * @return the telefones
+     */
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    /**
+     * @param telefones the telefones to set
+     */
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 
     /**
      * @return the id

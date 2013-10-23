@@ -19,6 +19,7 @@
         </style>
         <div class="divForm"> 
         <form id="fomrUsuario" action="<c:url value='/usuario'/>" method="post">
+            <input type='hidden' name='cid' value='${cid}'/>
             <input type="hidden" name="usuario.id" value="${usuario.id}"/>
             <label for="usuario.email"><fmt:message key="user.email"/></label>
             <input type="text" name="usuario.email" value="${usuario.email}"  required="true" title="E-mail"/><br/>
@@ -29,6 +30,7 @@
            
             <input type="submit" value="<fmt:message key="salvar"/>" />
         </form>
+        cid=${cid}
         </div>
              
         <div id="dialogFormTel" title="Telefones">

@@ -14,9 +14,14 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import com.edu.teste.controller.dao.UsuarioDao;
 import com.edu.teste.model.Telefone;
+import com.edu.teste.model.TelefonePk;
 import com.edu.teste.model.Usuario;
 import com.google.common.hash.Hashing;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 
 /**
@@ -24,16 +29,23 @@ import javax.inject.Inject;
  * @author eduardo
  */
 @Controller
-public class UsuarioController {
+@ConversationScoped
+public class UsuarioController implements Serializable {
     
     @Inject
     private Result result;
     @Inject
     private UsuarioDao dao;
+    @Inject
+    private Conversation conversation;
+    private List<Usuario> listUsuarios;
+    private Usuario usuario;
     
     @Get("/usuario")
     public void listagem() {
-        result.include("listUsuario", dao.all());
+        conversation.begin();
+        listUsuarios = (List<Usuario>) dao.all();
+        result.include("listUsuario", listUsuarios);
     }
     
     @Post("/usuario")
@@ -45,6 +57,7 @@ public class UsuarioController {
 //            }
 //        }
         dao.save(usuario);
+        conversation.end();
         result.redirectTo(this).listagem();
     }
     
@@ -56,6 +69,14 @@ public class UsuarioController {
     @Put("/usuario")
     public void editar(Usuario usuario) {
         Usuario entity = dao.find(usuario);
+        this.usuario = entity;
+        this.usuario.setTelefones(new ArrayList<Telefone>());
+        Telefone t = new Telefone();
+        t.setTelefonePk(new TelefonePk());
+        t.setTipo("rrrr");
+        t.getTelefonePk().setEmail(this.usuario.getEmail());
+        this.usuario.getTelefones().add(t);
+        result.include("cid", conversation.getId());
         result.redirectTo(this).form(entity);
     }
     

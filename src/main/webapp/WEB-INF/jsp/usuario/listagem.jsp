@@ -35,6 +35,7 @@
                         <form action="<c:url value='/usuario'/>" method="post">
                             <input type='hidden' name='_method' value='put'/>
                             <input type='hidden' name='usuario.id' value='${_v.id}'/>
+                            <input type='hidden' name='cid' value='${javax.enterprise.context.conversation.id}'/>
                             <input class="btn btn-mini" type="submit" value="<fmt:message key="editar"/>"/>
                         </form>
                     </td>
@@ -49,7 +50,7 @@
             </c:forEach>
         </tbody>
     </table>
-                
+               cid=${javax.enterprise.context.conversation.id} 
     <div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
