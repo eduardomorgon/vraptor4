@@ -31,26 +31,6 @@ public class AuthorizationInterceptor {
     @Inject
     private Result result;
     
-//    public void intercept(InterceptorStack stack, ResourceMethod method, Object resourceInstance) throws InterceptionException {
-//        /**
-//    	 * You can use the result even in interceptors.
-//    	 */
-//    	if (info.getUsuario()== null) {
-//            // remember added parameters will survive one more request, when there is a redirect
-//            result.include("errors", Arrays.asList(new ValidationMessage("Usuário não está logado!", "usuario")));
-//            result.forwardTo(HomeController.class).login();
-//    	} else {
-//            //dao.refresh(info.getUsuario());
-//            // continues execution
-//            stack.next(method, resourceInstance);
-//    	}
-//    }
-//
-//   
-//    public boolean accepts(ResourceMethod method) {
-//        return !method.containsAnnotation(Public.class);
-//    }
-
     @AroundCall
     public void intercept(SimpleInterceptorStack stack) {
         
