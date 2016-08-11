@@ -52,12 +52,10 @@ public class HomeController {
                 userInfo.login(currentUser);
                 result.redirectTo(HomeController.class).home();
             }else{
-//                validator.add(new ValidationMessage("Login e/ou senha inválidos", "usuario.login"));
                 validator.onErrorForwardTo(HomeController.class).login();
             }
         } catch (NullPointerException e) {
             logger.error("Login e/ou senha nulo");
-//            validator.add(new ValidationMessage("Login e/ou senha inválidos", "usuario.login"));
             validator.onErrorForwardTo(HomeController.class).login();
         }
       
