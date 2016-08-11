@@ -43,13 +43,11 @@ public class UsuarioDao implements GenericDao<Usuario>{
 
     @Override
     public void save(Usuario entity) {
-//        em.getTransaction().begin();
         if(entity.getId() != null){
             em.merge(entity);
         }else{
             em.persist(entity);
         }
-//        em.getTransaction().commit();
     }
 
     @Override
@@ -58,7 +56,6 @@ public class UsuarioDao implements GenericDao<Usuario>{
         Usuario u;
         try {
             u = (Usuario) em.find(Usuario.class, entity.getId());
-                    
             } catch (NoResultException e) {
             return false;
         }
