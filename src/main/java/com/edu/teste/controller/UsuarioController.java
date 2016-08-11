@@ -51,11 +51,6 @@ public class UsuarioController implements Serializable {
     @Post("/usuario")
     public void salvar(Usuario usuario){
         usuario.setSenha(Hashing.md5().hashString(usuario.getSenha()).toString());
-//        for (Telefone tel : usuario.getTelefones()) {
-//            if(tel.getTelefonePk().getEmail() == null){
-//                tel.getTelefonePk().setEmail(usuario.getEmail());
-//            }
-//        }
         dao.save(usuario);
         conversation.end();
         result.redirectTo(this).listagem();
